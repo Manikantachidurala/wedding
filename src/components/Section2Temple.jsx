@@ -53,14 +53,15 @@ const Section2Temple = () => {
   return (
     // No explicit height restrictions. The image dictates the height, 
     // ensuring a massive scrolling world (easily >300vh on most devices).
-    <section ref={containerRef} className="relative w-full z-10 flex flex-col items-center overflow-hidden bg-transparent">
+    <section ref={containerRef} className="relative w-full min-h-[100svh] z-10 flex flex-col justify-end items-center overflow-hidden bg-transparent">
       
-      <img 
-        src="/temple-vector.jpg" 
-        alt="Temple Scrolling World" 
-        // w-full ensures it spans 100% width with no side gaps.
-        className="w-full h-auto object-cover filter drop-shadow-2xl" 
-      />
+      <div className="relative w-full flex flex-col items-center">
+        <img 
+          src="/temple-vector.jpg" 
+          alt="Temple Scrolling World" 
+          className="w-full h-auto object-cover filter drop-shadow-2xl" 
+          onLoad={() => ScrollTrigger.refresh()}
+        />
 
       {/* The door container is placed exactly at the bottom center where the doorway is */}
       {/* We use percentage-based sizing relative to the massive width to ensure it scales perfectly on all devices */}
@@ -85,6 +86,7 @@ const Section2Temple = () => {
         >
           <div className="w-[10%] aspect-square rounded-full bg-gradient-to-bl from-gold-light to-gold shadow-md"></div>
         </div>
+      </div>
       </div>
 
     </section>
