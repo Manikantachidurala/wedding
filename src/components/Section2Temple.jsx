@@ -18,29 +18,41 @@ const Section2Temple = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "bottom bottom", // Pin when the bottom of the temple hits the bottom of the viewport
-          end: "+=150%", // Keep it pinned for a while to play the door animation
+          end: "+=250%", // Keep it pinned for longer to feel cinematic
           pin: true,
-          scrub: 1, 
-          pinSpacing: true, // This pushes the following content down so it appears smoothly AFTER the pin
+          scrub: 1.5, // Smoother scrub
+          pinSpacing: true, 
+          onUpdate: (self) => {
+            // Dispatch event when door starts opening significantly
+            if (self.progress > 0.3 && !self.doorOpened) {
+              self.doorOpened = true;
+              window.dispatchEvent(new Event('templeDoorOpening'));
+            } else if (self.progress <= 0.3 && self.doorOpened) {
+              self.doorOpened = false;
+              window.dispatchEvent(new Event('templeDoorClosing'));
+            }
+          }
         }
       });
 
-      // 1. Zoom into the door slightly while opening
+      // 1. Realistic Camera Effect: Move up and slight scale
       tl.to(containerRef.current, {
-        scale: 1.1,
+        y: "-15vh",
+        scale: 1.05,
         transformOrigin: "center bottom",
         ease: "power1.inOut",
         duration: 1
       }, 0);
 
-      // 2. Open doors
-      tl.to(leftDoorRef.current, { rotateY: -100, ease: "power2.inOut", duration: 0.8 }, 0.1);
-      tl.to(rightDoorRef.current, { rotateY: 100, ease: "power2.inOut", duration: 0.8 }, 0.1);
+      // 2. Open doors with 3D depth and slide
+      tl.to(leftDoorRef.current, { rotateY: -105, xPercent: -15, ease: "power2.inOut", duration: 0.8 }, 0.1);
+      tl.to(rightDoorRef.current, { rotateY: 105, xPercent: 15, ease: "power2.inOut", duration: 0.8 }, 0.1);
 
-      // 3. Brighten the portal glow to simulate entering
+      // 3. Brighten the portal glow heavily to simulate divine entering
       tl.to(portalGlowRef.current, {
         opacity: 1,
         scale: 1.5,
+        boxShadow: "inset 0 0 120px rgba(255, 215, 0, 1), 0 0 80px rgba(217, 119, 6, 0.6)",
         ease: "power2.in",
         duration: 0.5
       }, 0.5);
@@ -67,6 +79,7 @@ const Section2Temple = () => {
       {/* We use percentage-based sizing relative to the massive width to ensure it scales perfectly on all devices */}
       <div 
         className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[22%] aspect-[3/4] flex perspective-[1200px] z-30"
+        style={{ transformStyle: 'preserve-3d' }}
       >
         {/* The glowing interior of the temple (starts invisible, fades in as doors open) */}
         <div ref={portalGlowRef} className="absolute inset-0 bg-[#020617] opacity-0 shadow-[inset_0_0_80px_rgba(217,119,6,0.8)] z-0 rounded-t-full blur-sm"></div>

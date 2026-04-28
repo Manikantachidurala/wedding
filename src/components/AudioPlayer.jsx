@@ -1,8 +1,36 @@
 import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
+  const bellAudioRef = useRef(null);
+
+  useEffect(() => {
+    const handleDoorOpen = () => {
+      if (bellAudioRef.current) {
+        bellAudioRef.current.volume = 0.6;
+        bellAudioRef.current.play().catch(e => console.log("Bell autoplay prevented", e));
+      }
+      if (audioRef.current && isPlaying) {
+        gsap.to(audioRef.current, { volume: 0.6, duration: 2, ease: "power2.inOut" });
+      }
+    };
+
+    const handleDoorClose = () => {
+      if (audioRef.current && isPlaying) {
+        gsap.to(audioRef.current, { volume: 0.2, duration: 2, ease: "power2.inOut" });
+      }
+    };
+
+    window.addEventListener('templeDoorOpening', handleDoorOpen);
+    window.addEventListener('templeDoorClosing', handleDoorClose);
+
+    return () => {
+      window.removeEventListener('templeDoorOpening', handleDoorOpen);
+      window.removeEventListener('templeDoorClosing', handleDoorClose);
+    };
+  }, [isPlaying]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -37,6 +65,11 @@ const AudioPlayer = () => {
         loop
         // A placeholder for a traditional flute/veena instrumental track
         src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_febc508520.mp3?filename=indian-classical-music-126284.mp3" 
+      />
+      <audio 
+        ref={bellAudioRef}
+        // Soft temple bell sound
+        src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"
       />
       <button 
         onClick={togglePlay}

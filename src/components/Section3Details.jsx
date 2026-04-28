@@ -9,19 +9,20 @@ const Section3Details = () => {
   const cardRef = useRef(null);
 
   useEffect(() => {
-    // Smooth door-open to invitation appear sequence
-    // This animation uses the exact sequence: scale 0.95 -> 1, translate upward, fade in
+    // Cinematic Blur-to-Clear Reveal
+    // Starts blurred, lower down, and scales up smoothly
     gsap.fromTo(cardRef.current,
-      { opacity: 0, scale: 0.95, y: 50 },
+      { opacity: 0, scale: 0.95, y: 80, filter: "blur(20px)" },
       {
         opacity: 1,
         scale: 1,
         y: 0,
+        filter: "blur(0px)",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 85%", 
-          end: "top 40%", 
-          scrub: true,
+          end: "top 30%", // Extended end point for smoother transition
+          scrub: 1.5, // Smoother scrub matches the cinematic feel
         }
       }
     );
