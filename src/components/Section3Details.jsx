@@ -73,15 +73,15 @@ const Section3Details = () => {
         </p>
 
         {/* Sumuhurtham Box */}
-        <div className="w-full border border-gold/40 rounded-xl p-4 md:p-6 mb-8 bg-white/5 relative">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0a1128] px-4 font-serif text-gold font-bold">
+        <fieldset className="w-full border border-gold/40 rounded-xl p-4 md:p-6 mb-8 bg-white/5">
+          <legend className="px-4 font-serif text-gold font-bold mx-auto whitespace-nowrap">
             ~ Sumuhurtham ~
-          </div>
+          </legend>
           <p className="font-serif text-sm md:text-base text-white mt-2" style={{ lineHeight: '1.8' }}>
             On Friday <span className="font-bold text-gold-light">8th May 2026</span> at <span className="font-bold text-gold-light">09-26 a.m.</span> <br/>
             Uttarashada Nakshatram, "Midhuna." Lagnam.
           </p>
-        </div>
+        </fieldset>
 
         {/* Venue & Lunch */}
         <div className="mb-8 w-full">
