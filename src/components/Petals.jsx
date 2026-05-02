@@ -4,8 +4,11 @@ const Petals = () => {
   const [petals, setPetals] = useState([]);
 
   useEffect(() => {
-    // Generate an array of petals with random properties
-    const petalArray = Array.from({ length: 30 }).map((_, i) => ({
+    // Reduce petal count for mobile to preserve performance
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 12 : 30;
+    
+    const petalArray = Array.from({ length: count }).map((_, i) => ({
       id: i,
       left: Math.random() * 100, // random start position 0-100vw
       animationDuration: Math.random() * 5 + 5, // 5s to 10s

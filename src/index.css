@@ -3,16 +3,52 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-[#020617] text-white overflow-x-hidden;
     margin: 0;
     padding: 0;
+    /* Prevent mobile bounce/pull-to-refresh for a seamless reel experience */
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   section {
     margin: 0;
     padding: 0;
   }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-gpu {
+    will-change: transform, opacity, filter;
+  }
+}
+
+/* Progress Bar for the Cinematic Scroll */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(to right, #D97706, #FDE68A);
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(217,119,6,0.5);
+  transition: width 0.1s ease-out;
 }
 
 /* Gradient Text Utility */
@@ -79,6 +115,7 @@
   pointer-events: none;
   z-index: 100;
   opacity: 0.6;
+  will-change: transform, top;
 }
 
 @keyframes petal-fall {
@@ -103,6 +140,7 @@
   opacity: 0.8;
   display: flex;
   justify-content: center;
+  will-change: transform, bottom;
 }
 
 .lantern::after {

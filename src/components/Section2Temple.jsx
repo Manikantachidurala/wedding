@@ -67,18 +67,18 @@ const Section2Temple = () => {
     // ensuring a massive scrolling world (easily >300vh on most devices).
     <section ref={containerRef} className="relative w-full min-h-[100svh] z-10 flex flex-col justify-end items-center overflow-hidden bg-transparent">
       
-      <div className="relative w-full flex flex-col items-center">
+      <div className="relative w-full flex flex-col items-center will-change-transform">
         <img 
           src="/temple-vector.jpg" 
           alt="Temple Scrolling World" 
-          className="w-full h-auto object-cover filter drop-shadow-2xl" 
+          className="w-full h-[100svh] md:h-auto object-cover object-bottom filter drop-shadow-2xl" 
           onLoad={() => ScrollTrigger.refresh()}
         />
 
       {/* The door container is placed exactly at the bottom center where the doorway is */}
       {/* We use percentage-based sizing relative to the massive width to ensure it scales perfectly on all devices */}
       <div 
-        className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[22%] aspect-[3/4] flex perspective-[1200px] z-30"
+        className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[35%] md:w-[22%] aspect-[3/4] flex perspective-[1200px] z-30 will-change-gpu"
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* The glowing interior of the temple (starts invisible, fades in as doors open) */}
@@ -89,7 +89,7 @@ const Section2Temple = () => {
           ref={leftDoorRef}
           className="w-1/2 h-full bg-[#1c0d06] border-r-2 border-black origin-left shadow-[inset_0_0_20px_rgba(0,0,0,0.9)] flex items-center justify-end pr-[5%] z-10 relative"
         >
-          <div className="w-[10%] aspect-square rounded-full bg-gradient-to-br from-gold-light to-gold shadow-md"></div>
+          <div className="w-[15%] md:w-[10%] aspect-square rounded-full bg-gradient-to-br from-gold-light to-gold shadow-md"></div>
         </div>
         
         {/* Right Door */}
@@ -97,7 +97,7 @@ const Section2Temple = () => {
           ref={rightDoorRef}
           className="w-1/2 h-full bg-[#1c0d06] border-l-2 border-black origin-right shadow-[inset_0_0_20px_rgba(0,0,0,0.9)] flex items-center justify-start pl-[5%] z-10 relative"
         >
-          <div className="w-[10%] aspect-square rounded-full bg-gradient-to-bl from-gold-light to-gold shadow-md"></div>
+          <div className="w-[15%] md:w-[10%] aspect-square rounded-full bg-gradient-to-bl from-gold-light to-gold shadow-md"></div>
         </div>
       </div>
       </div>

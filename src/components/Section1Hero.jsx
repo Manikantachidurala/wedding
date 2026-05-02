@@ -35,28 +35,28 @@ const Section1Hero = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen flex flex-col items-center justify-center z-10 py-10">
+    <section ref={containerRef} className="relative w-full min-h-[100svh] flex flex-col items-center justify-center z-10 py-10 overflow-hidden">
       
-      <div ref={textRef} className="relative z-20 flex flex-col items-center text-center px-4 w-full">
+      <div ref={textRef} className="relative z-20 flex flex-col items-center text-center px-6 w-full will-change-gpu">
         
-        <p className="font-serif text-xl md:text-2xl text-gold-light mb-8 opacity-90 tracking-widest drop-shadow-md">
+        <p className="font-serif text-lg md:text-2xl text-gold-light mb-6 md:mb-8 opacity-90 tracking-[0.2em] md:tracking-widest drop-shadow-md">
           ॐ Shubha Vivaha
         </p>
 
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-6 text-white tracking-widest font-semibold drop-shadow-2xl text-gradient-gold">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6 text-white tracking-widest font-semibold drop-shadow-2xl text-gradient-gold leading-tight">
           Chi. Gireesh
         </h1>
         
-        <p className="font-calligraphy text-2xl md:text-4xl text-gold-light mb-6 opacity-90 drop-shadow-md">
+        <p className="font-calligraphy text-2xl md:text-4xl text-gold-light mb-4 md:mb-6 opacity-90 drop-shadow-md">
           weds
         </p>
         
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl mb-12 text-white tracking-widest font-semibold drop-shadow-2xl text-gradient-gold">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-10 md:mb-12 text-white tracking-widest font-semibold drop-shadow-2xl text-gradient-gold leading-tight">
           Chi. Sow. Sri Soumya
         </h1>
 
-        <div className="flex flex-col items-center gap-2 mb-10 animate-bounce">
-          <p className="font-sans text-xs md:text-sm tracking-[0.2em] text-white/70 uppercase">
+        <div className="flex flex-col items-center gap-3 mb-8 md:mb-10 animate-bounce">
+          <p className="font-sans text-[10px] md:text-sm tracking-[0.3em] text-white/70 uppercase">
             Scroll to begin
           </p>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +64,7 @@ const Section1Hero = () => {
           </svg>
         </div>
 
-        <p className="font-serif text-sm md:text-base text-gold-light/80 tracking-widest drop-shadow-sm uppercase">
+        <p className="font-serif text-xs md:text-base text-gold-light/80 tracking-[0.1em] md:tracking-widest drop-shadow-sm uppercase max-w-[280px] md:max-w-none">
           ॥ Srirasthu !! Shubhamasthu !! Avighnamasthu ॥
         </p>
 

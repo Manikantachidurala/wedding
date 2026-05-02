@@ -5,8 +5,11 @@ const Lanterns = () => {
   const [lanterns, setLanterns] = useState([]);
 
   useEffect(() => {
-    // Generate an array of lanterns
-    const lanternArray = Array.from({ length: 15 }).map((_, i) => ({
+    // Reduce lantern count for mobile to preserve performance
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 8 : 15;
+    
+    const lanternArray = Array.from({ length: count }).map((_, i) => ({
       id: i,
       left: Math.random() * 100, // random start position 0-100vw
       animationDuration: Math.random() * 10 + 15, // 15s to 25s for slow float

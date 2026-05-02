@@ -29,22 +29,22 @@ const Section5Map = () => {
   const directionsUrl = "https://www.google.com/maps/dir/?api=1&destination=Sri+Venkateswara+Kalyana+Mandapam,+Thorrur,+Mahabubabad";
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen py-24 flex flex-col items-center justify-center z-10 px-4">
+    <section ref={containerRef} className="relative w-full min-h-[100svh] py-12 md:py-24 flex flex-col items-center justify-center z-10 px-4">
       
       {/* Frosted Glass Card Container - Max Width 800px for map */}
       <div 
         ref={cardRef} 
-        className="w-full max-w-[800px] relative z-10 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6 md:p-10 flex flex-col items-center"
+        className="w-full max-w-[800px] relative z-10 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6 md:p-10 flex flex-col items-center will-change-gpu"
       >
-        <h2 className="font-serif text-3xl md:text-4xl text-gradient-gold mb-4 text-center">
+        <h2 className="font-serif text-3xl md:text-4xl text-gradient-gold mb-3 md:mb-4 text-center leading-tight">
           Find Us Here
         </h2>
-        <p className="font-sans text-sm md:text-base text-white mb-8 text-center max-w-md" style={{ lineHeight: '1.8' }}>
+        <p className="font-sans text-xs md:text-base text-white/90 mb-6 md:mb-8 text-center max-w-md px-2" style={{ lineHeight: '1.6' }}>
           Sri Venkateswara Kalyana Mandapam, Kantayapalem Road, Thorrur, Mahabubabad
         </p>
 
         {/* Map Container */}
-        <div className="w-full aspect-square md:aspect-[21/9] rounded-xl overflow-hidden border border-white/20 shadow-inner mb-8 relative group">
+        <div className="w-full aspect-[4/3] md:aspect-[21/9] rounded-xl overflow-hidden border border-white/20 shadow-inner mb-6 md:mb-8 relative group">
           <iframe 
             src={mapUrl}
             width="100%" 
@@ -63,9 +63,9 @@ const Section5Map = () => {
           href={directionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-gold/80 backdrop-blur-md border border-gold font-sans rounded-full hover:bg-gold shadow-[0_0_20px_rgba(217,119,6,0.5)] hover:shadow-[0_0_30px_rgba(217,119,6,0.8)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold"
+          className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-white transition-all duration-300 bg-gold/80 backdrop-blur-md border border-gold font-sans rounded-full hover:bg-gold shadow-[0_0_20px_rgba(217,119,6,0.5)] active:scale-95 focus:outline-none"
         >
-          <span className="relative flex items-center gap-2">
+          <span className="relative flex items-center gap-2 text-sm md:text-base uppercase tracking-wider">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
@@ -75,8 +75,8 @@ const Section5Map = () => {
       </div>
 
       {/* Footer / End tag */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center w-full">
-         <p className="font-sans text-xs text-gray-400 uppercase tracking-[0.2em]">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center w-full px-4">
+         <p className="font-sans text-[10px] md:text-xs text-gray-400 uppercase tracking-[0.3em] leading-relaxed">
            Looking forward to celebrating with you
          </p>
       </div>
