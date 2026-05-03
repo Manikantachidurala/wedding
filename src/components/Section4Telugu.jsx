@@ -36,6 +36,10 @@ const Section4Telugu = () => {
       >
         
         {/* Top Header */}
+        <h2 className="font-telugu text-xl md:text-3xl text-gold-light mb-4 drop-shadow-md">
+          తవిడిశెట్టి వారి పెళ్లి పిలుపు
+        </h2>
+        
         <p className="font-telugu text-[10px] md:text-sm text-gold-light tracking-widest opacity-90 mb-4 md:mb-6 drop-shadow-sm">
           శ్రీరస్తు! &nbsp;&nbsp;&nbsp; శుభమస్తు!! &nbsp;&nbsp;&nbsp; అవిఘ్నమస్తు!!!
         </p>

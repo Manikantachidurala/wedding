@@ -39,6 +39,10 @@ const Section1Hero = () => {
       
       <div ref={textRef} className="relative z-20 flex flex-col items-center text-center px-6 w-full will-change-gpu">
         
+        <h2 className="text-2xl md:text-4xl mb-6 text-gold-light tracking-wide drop-shadow-lg font-serif animate-pulse">
+          తవిడిశెట్టి వారి పెళ్లి పిలుపు
+        </h2>
+
         <p className="font-serif text-lg md:text-2xl text-gold-light mb-6 md:mb-8 opacity-90 tracking-[0.2em] md:tracking-widest drop-shadow-md">
           ॐ Shubha Vivaha
         </p>

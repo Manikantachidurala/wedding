@@ -6,6 +6,7 @@ const AudioPlayer = () => {
   const playerRef = useRef(null);
   const bellAudioRef = useRef(null);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const hasInteractedRef = useRef(false);
 
   useEffect(() => {
     console.log("AudioPlayer: Initializing...");
@@ -44,8 +45,11 @@ const AudioPlayer = () => {
             setIsPlayerReady(true);
             event.target.setVolume(20);
             
-            // Attempt autoplay
-            event.target.playVideo();
+            // If user already interacted, play now
+            if (hasInteractedRef.current) {
+              console.log("AudioPlayer: Player ready and interaction detected, playing...");
+              event.target.playVideo();
+            }
           },
           onStateChange: (event) => {
             console.log("AudioPlayer: YT State Change:", event.data);
@@ -70,22 +74,32 @@ const AudioPlayer = () => {
     // Fallback interaction listener
     const playOnInteraction = () => {
       console.log("AudioPlayer: Interaction detected");
+      hasInteractedRef.current = true;
+      
       if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
         try {
-          playerRef.current.unMute();
-          playerRef.current.setVolume(20);
-          playerRef.current.playVideo();
-          
-          // Remove listeners after success
-          window.removeEventListener('click', playOnInteraction);
-          window.removeEventListener('scroll', playOnInteraction);
-          window.removeEventListener('touchstart', playOnInteraction);
-          window.removeEventListener('mousedown', playOnInteraction);
-          window.removeEventListener('keydown', playOnInteraction);
+          // Only play if player is actually ready
+          const playerState = playerRef.current.getPlayerState();
+          if (playerState !== -1) { // -1 means unstarted/not ready
+            playerRef.current.unMute();
+            playerRef.current.setVolume(20);
+            playerRef.current.playVideo();
+            
+            // Remove listeners after success
+            removeInteractionListeners();
+          }
         } catch (e) {
           console.error("AudioPlayer: Play on interaction failed", e);
         }
       }
+    };
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', playOnInteraction);
+      window.removeEventListener('scroll', playOnInteraction);
+      window.removeEventListener('touchstart', playOnInteraction);
+      window.removeEventListener('mousedown', playOnInteraction);
+      window.removeEventListener('keydown', playOnInteraction);
     };
 
     window.addEventListener('click', playOnInteraction);
@@ -95,11 +109,7 @@ const AudioPlayer = () => {
     window.addEventListener('keydown', playOnInteraction);
 
     return () => {
-      window.removeEventListener('click', playOnInteraction);
-      window.removeEventListener('scroll', playOnInteraction);
-      window.removeEventListener('touchstart', playOnInteraction);
-      window.removeEventListener('mousedown', playOnInteraction);
-      window.removeEventListener('keydown', playOnInteraction);
+      removeInteractionListeners();
     };
   }, []);
 
