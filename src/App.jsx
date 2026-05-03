@@ -6,6 +6,7 @@ import Section2Temple from './components/Section2Temple';
 import Section3Details from './components/Section3Details';
 import Section4Telugu from './components/Section4Telugu';
 import Section5Map from './components/Section5Map';
+import SplashOverlay from './components/SplashOverlay';
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -23,6 +24,10 @@ export default function App() {
 
   return (
     <main className="w-full bg-water min-h-screen text-white relative">
+      <SplashOverlay onEnter={() => {
+        console.log("Entering invitation...");
+      }} />
+
       {/* Scroll Progress Indicator */}
       <div 
         className="scroll-progress" 
