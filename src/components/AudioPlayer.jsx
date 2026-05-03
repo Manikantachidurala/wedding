@@ -37,7 +37,8 @@ const AudioPlayer = () => {
           playlist: 'DlEIVZE0YC0',
           start: 11,
           mute: 0,
-          origin: window.location.origin
+          origin: window.location.origin,
+          playsinline: 1
         },
         events: {
           onReady: (event) => {
@@ -78,16 +79,22 @@ const AudioPlayer = () => {
       
       if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
         try {
-          // Only play if player is actually ready
-          const playerState = playerRef.current.getPlayerState();
-          if (playerState !== -1) { // -1 means unstarted/not ready
-            playerRef.current.unMute();
-            playerRef.current.setVolume(20);
-            playerRef.current.playVideo();
-            
-            // Remove listeners after success
-            removeInteractionListeners();
-          }
+          // Attempt to play regardless of state - if it's unstarted (-1) or cued (5), this will start it.
+          // Browsers will allow this now because it's inside a user interaction handler.
+          playerRef.current.unMute();
+          playerRef.current.setVolume(20);
+          playerRef.current.playVideo();
+          
+          // We'll check if it actually started in a moment
+          setTimeout(() => {
+            if (playerRef.current && typeof playerRef.current.getPlayerState === 'function') {
+              const state = playerRef.current.getPlayerState();
+              if (state === 1 || state === 3) { // Playing or Buffering
+                console.log("AudioPlayer: Successfully started playback on interaction");
+                removeInteractionListeners();
+              }
+            }
+          }, 500);
         } catch (e) {
           console.error("AudioPlayer: Play on interaction failed", e);
         }
@@ -165,7 +172,7 @@ const AudioPlayer = () => {
 
   return (
     <div className="fixed top-6 right-6 z-[110]">
-      <div id="youtube-audio-player" className="hidden pointer-events-none absolute -left-[9999px]"></div>
+      <div id="youtube-audio-player" className="opacity-0 pointer-events-none absolute -left-[9999px]"></div>
       <audio
         ref={bellAudioRef}
         // Higher quality temple bell
